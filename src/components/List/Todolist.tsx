@@ -1,4 +1,3 @@
-// Todolist.tsx
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/rootReducer';
@@ -38,7 +37,7 @@ const TodoList: React.FC = () => {
           value={inputText}
           onChange={handleInputChange}
         />
-        <button type='submit'>등록하기</button>
+        <button type='submit'>등록하기!</button>
       </form>
       <ul>
         {todos.map((todo) => (
