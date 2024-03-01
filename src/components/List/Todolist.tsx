@@ -1,13 +1,13 @@
+// Todolist.tsx
 import React, { useState } from 'react';
-
-interface Todo {
-  id: number;
-  text: string;
-}
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/rootReducer';
+import { addTodo, deleteTodo } from '../../store/todoReducer';
 
 const TodoList: React.FC = () => {
   const [inputText, setInputText] = useState<string>('');
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const dispatch = useDispatch();
+  const todos = useSelector((state: RootState) => state.toDos.todos);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(e.target.value);
@@ -15,13 +15,13 @@ const TodoList: React.FC = () => {
 
   const handleAddTodo = () => {
     if (inputText.trim() !== '') {
-      setTodos([...todos, { id: Date.now(), text: inputText }]);
+      dispatch(addTodo(inputText));
       setInputText('');
     }
   };
 
   const handleDeleteTodo = (id: number) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    dispatch(deleteTodo(id));
   };
 
   return (
